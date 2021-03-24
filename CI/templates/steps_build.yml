@@ -53,7 +53,7 @@ steps:
     mv /home/vsts/poky/build/tmp/deploy/images/${MACHINE}/freertos-demo*.elf ${DEPLOY_ARTIFACTS_DIR}
     # QEMUboot
     mv /home/vsts/poky/build/tmp/deploy/images/${MACHINE}/freertos-demo-*${MACHINE}-*.qemuboot.conf ${DEPLOY_ARTIFACTS_DIR}
-  displayName: 'Moving Artifacts - $(MACHINE) - $(DISTRO)'
+  displayName: 'Moving Artifacts - $(MACHINE)'
 
 - publish: $(DEPLOY_ARTIFACTS_DIR)
-  artifact: $(DISTRO)-${{parameters.buildtype}}
+  artifact: $(MACHINE)-${{parameters.buildtype}}
