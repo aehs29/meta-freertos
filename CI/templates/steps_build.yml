@@ -1,6 +1,4 @@
 parameters:
-  build_branch: 'master'
-  machine: ''
   buildtype: ''
 
 steps:
