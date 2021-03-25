@@ -12,17 +12,25 @@ schedules:
     - dunfell
   always: true
 
-jobs:
-  - template: templates/build.yml
-    parameters:
-      pool:
-        vmImage: 'ubuntu-20.04'
-      buildtype: 'freertos'
-      machine: 'qemuarmv5'
+stages:
+- stage: freertos
+  displayName: freeRTOS
+  dependsOn: []
+  jobs:
+    - template: templates/build.yml
+      parameters:
+        pool:
+          vmImage: 'ubuntu-20.04'
+        machine: 'qemuarmv5'
+        buildtype: 'freertos'
 
-  - template: templates/build.yml
-    parameters:
-      pool:
-        vmImage: 'ubuntu-20.04'
-      buildtype: 'poky'
-      machine: 'qemuarmv5'
+- stage: multiconf
+  displayName: LinuxFreeRTOS
+  dependsOn: []
+  jobs:
+    - template: templates/build.yml
+      parameters:
+        pool:
+          vmImage: 'ubuntu-20.04'
+        machine: 'qemuarmv5'
+        buildtype: 'poky'
