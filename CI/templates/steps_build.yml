@@ -17,6 +17,8 @@ steps:
       echo "Building with the following configuration:"
       tail -n 10 conf/local.conf
       bitbake mc:dummy-x86-64:core-image-minimal
+      ls -l ./tmp/deploy/images/qemuarmv5/
+      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy-freertos-demo-image-complete/
     condition: succeededOrFailed()
     displayName: 'Build FreeRTOS + Linux images'
 
@@ -29,9 +31,10 @@ steps:
       echo "INHERIT += \"testimage\"" >> ./conf/local.conf
       echo "TEST_SUITES = \"freertos_periodic\"" >> ./conf/local.conf
       echo "TESTIMAGE_BOOT_PATTERNS[search_cmd_finished] = \"secs\"" >> ./conf/local.conf
-
+      tail -n 10 conf/local.conf
       bitbake mc::freertos-demo-local -c testimage
-
+      ls -l ./tmp/deploy/images/qemuarmv5/
+      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy-freertos-demo-image-complete/
     displayName: 'Testing FreeRTOS Periodic'
 
 - ${{ if eq(parameters.buildtype, 'freertos') }}:
@@ -46,6 +49,8 @@ steps:
       echo "Building with the following configuration:"
       tail -n 10 conf/local.conf
       bitbake freertos-demo
+      ls -l ./tmp/deploy/images/qemuarmv5/
+      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy-freertos-demo-image-complete/
     condition: succeededOrFailed()
     displayName: 'Build freertos image'
   - bash: |
@@ -56,9 +61,10 @@ steps:
       # Enable a testcase
       echo "INHERIT += \"testimage\"" >> ./conf/local.conf
       echo "TEST_SUITES = \"freertos_echo\"" >> ./conf/local.conf
-
+      tail -n 10 conf/local.conf
       bitbake freertos-demo -c testimage
-
+      ls -l ./tmp/deploy/images/qemuarmv5/
+      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy-freertos-demo-image-complete/
     displayName: 'Testing FreeRTOS Echo'
 
 - bash: |
