@@ -16,9 +16,10 @@ steps:
       echo "${EXTRA_LOCALCONF}" >> ./conf/local.conf
       echo "Building with the following configuration:"
       tail -n 10 conf/local.conf
+      bitbake freertos-image -e | grep IMGDEPLOYDIR
       bitbake mc:dummy-x86-64:core-image-minimal
       ls -l ./tmp/deploy/images/qemuarmv5/
-      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy-freertos-demo-image-complete/
+      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy*/
     condition: succeededOrFailed()
     displayName: 'Build FreeRTOS + Linux images'
 
@@ -34,7 +35,7 @@ steps:
       tail -n 10 conf/local.conf
       bitbake mc::freertos-demo-local -c testimage
       ls -l ./tmp/deploy/images/qemuarmv5/
-      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy-freertos-demo-image-complete/
+      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy*/
     displayName: 'Testing FreeRTOS Periodic'
 
 - ${{ if eq(parameters.buildtype, 'freertos') }}:
@@ -48,9 +49,10 @@ steps:
       echo "SSTATE_MIRRORS=\"\"" >> ./conf/local.conf
       echo "Building with the following configuration:"
       tail -n 10 conf/local.conf
+      bitbake freertos-demo -e | grep IMGDEPLOYDIR
       bitbake freertos-demo
       ls -l ./tmp/deploy/images/qemuarmv5/
-      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy-freertos-demo-image-complete/
+      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy*/
     condition: succeededOrFailed()
     displayName: 'Build freertos image'
   - bash: |
@@ -64,7 +66,7 @@ steps:
       tail -n 10 conf/local.conf
       bitbake freertos-demo -c testimage
       ls -l ./tmp/deploy/images/qemuarmv5/
-      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy-freertos-demo-image-complete/
+      ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy*/
     displayName: 'Testing FreeRTOS Echo'
 
 - bash: |
