@@ -20,6 +20,8 @@ steps:
       bitbake mc:dummy-x86-64:core-image-minimal
       ls -l ./tmp/deploy/images/qemuarmv5/
       ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy*/
+      cat ./tmp/work/armv5e-oe-eabi/freertos-demo/FreeRTOSv10.4.3*/temp/log.do_rootfs
+      cat ./tmp/work/armv5e-oe-eabi/freertos-demo/FreeRTOSv10.4.3*/temp/log.task_order
     condition: succeededOrFailed()
     displayName: 'Build FreeRTOS + Linux images'
 
@@ -36,6 +38,8 @@ steps:
       bitbake mc::freertos-demo-local -c testimage
       ls -l ./tmp/deploy/images/qemuarmv5/
       ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy*/
+      cat ./tmp/work/armv5e-oe-eabi/freertos-demo/FreeRTOSv10.4.3*/temp/log.do_rootfs
+      cat ./tmp/work/armv5e-oe-eabi/freertos-demo/FreeRTOSv10.4.3*/temp/log.task_order
     displayName: 'Testing FreeRTOS Periodic'
 
 - ${{ if eq(parameters.buildtype, 'freertos') }}:
@@ -53,6 +57,8 @@ steps:
       bitbake freertos-demo
       ls -l ./tmp/deploy/images/qemuarmv5/
       ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy*/
+      cat ./tmp/work/armv5e-oe-eabi/freertos-demo/FreeRTOSv10.4.3*/temp/log.do_rootfs
+      cat ./tmp/work/armv5e-oe-eabi/freertos-demo/FreeRTOSv10.4.3*/temp/log.task_order
     condition: succeededOrFailed()
     displayName: 'Build freertos image'
   - bash: |
@@ -67,6 +73,8 @@ steps:
       bitbake freertos-demo -c testimage
       ls -l ./tmp/deploy/images/qemuarmv5/
       ls -l ./tmp/work/armv5e-oe-eabi/freertos-*/FreeRTOSv10.4.3*/deploy*/
+      cat ./tmp/work/armv5e-oe-eabi/freertos-demo/FreeRTOSv10.4.3*/temp/log.do_rootfs
+      cat ./tmp/work/armv5e-oe-eabi/freertos-demo/FreeRTOSv10.4.3*/temp/log.task_order
     displayName: 'Testing FreeRTOS Echo'
 
 - bash: |
