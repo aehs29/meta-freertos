@@ -50,7 +50,7 @@ steps:
       echo "${EXTRA_LOCALCONF}" >> ./conf/local.conf
 
       # Disable shared sstate for baremetal build
-      echo "SSTATE_MIRRORS=\"\"" >> ./conf/local.conf
+      # echo "SSTATE_MIRRORS=\"\"" >> ./conf/local.conf
       echo "Building with the following configuration:"
       tail -n 10 conf/local.conf
       bitbake freertos-demo -e | grep IMGDEPLOYDIR
